@@ -1,0 +1,2 @@
+Learnspot v25 – PWA
+Alle Dateien in das Hauptverzeichnis eines öffentlichen GitHub-Repositories hochladen. Settings > Pages > Deploy from a branch > main > / (root) > Save. HTTPS-Link öffnen. iOS: Safari > Teilen > Zum Home-Bildschirm. Android: Chrome > App installieren. Offline erst nach erfolgreichem Online-Aufruf. Updates: index.html aktualisieren und CACHE in sw.js auf neue Versionsnummer setzen. Lokale Daten sind pro Browser und Website-Adresse getrennt.
