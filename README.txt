@@ -1,2 +1,1 @@
-Learnspot v78
-Update von v77: nur App-Dateien aktualisieren, kein neues SQL. Falls v77 SQL noch nicht erfolgreich ausgeführt wurde, setup-arena77.sql (korrigiert) verwenden.
+Learnspot v79 – Energy Shield. Kein neues SQL gegenüber v78 erforderlich. Bei fehlendem v77-Update die korrigierte setup-arena77.sql verwenden.
