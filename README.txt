@@ -3,3 +3,4 @@ Learnspot v92 – ohne Pets und Arena. Bestehende Installation: App-Dateien erse
 V115: setup-trade115.sql im Supabase SQL Editor ausführen. Handelbare Genesis-Sammlerstücke sind getrennt vom Starter und von lokalen Edelsteinen.
 
 V118: Spotify entfernt, XP-Anzeige umplatziert, neues Designsystem, Karteikarten aus Infotexten und Notizen, Start-Guide, hochwertigerer Kristall. Kein SQL-Update nötig.
+V119: Genesis neu geordnet (Kristall kleiner), Skill-Tree-Texte zoombar mit „Selbst anwenden“, auffälligeres Design.
