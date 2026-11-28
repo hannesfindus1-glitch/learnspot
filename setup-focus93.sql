@@ -1,0 +1,10 @@
+create table if not exists public.ls_focus93(id uuid primary key default gen_random_uuid(), host uuid not null references auth.users(id), guest uuid not null references auth.users(id), minutes int not null check(minutes in (25,45)), created_at timestamptz not null default now(), ends_at timestamptz);
+alter table public.ls_focus93 enable row level security;
+revoke all on public.ls_focus93 from anon,authenticated;
+create or replace function public.ls_focus_create93(peer_id uuid,mins int) returns void language plpgsql security definer set search_path='' as $$ begin
+if auth.uid() is null or not exists(select 1 from public.ls_connections c where c.accepted and ((c.sender=auth.uid() and c.recipient=peer_id) or (c.recipient=auth.uid() and c.sender=peer_id))) then raise exception 'Keine bestätigte Freundschaft'; end if;
+insert into public.ls_focus93(host,guest,minutes) values(auth.uid(),peer_id,mins); end $$;
+create or replace function public.ls_focus_accept93(room_id uuid) returns void language sql security definer set search_path='' as $$ update public.ls_focus93 set ends_at=now()+make_interval(mins=>minutes) where id=room_id and guest=auth.uid() and ends_at is null and created_at>now()-interval '1 day' $$;
+create or replace function public.ls_focus_list93() returns table(id uuid,partner text,minutes int,ends_at timestamptz,incoming boolean) language sql security definer set search_path='' as $$ select r.id,coalesce(p.display_name,'Lernpartner'),r.minutes,r.ends_at,r.guest=auth.uid() from public.ls_focus93 r left join public.ls_profiles52() p on p.peer=case when r.host=auth.uid() then r.guest else r.host end where auth.uid() in(r.host,r.guest) and r.created_at>now()-interval '1 day' order by r.created_at desc limit 20 $$;
+revoke execute on function public.ls_focus_create93(uuid,int),public.ls_focus_accept93(uuid),public.ls_focus_list93() from public,anon;
+grant execute on function public.ls_focus_create93(uuid,int),public.ls_focus_accept93(uuid),public.ls_focus_list93() to authenticated;
